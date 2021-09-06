@@ -9,14 +9,14 @@
   </url>
   
   <url>
-    <loc>https://jackzhang9.github.io/2021/09/06/%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://jackzhang9.github.io/2021/09/06/%E6%B5%8B%E8%AF%95/</loc>
     
     <lastmod>2021-09-06</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jackzhang9.github.io/2021/09/05/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://jackzhang9.github.io/2021/09/06/%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2021-09-06</lastmod>
     
@@ -39,6 +39,13 @@
 
   
   <url>
+    <loc>https://jackzhang9.github.io/tags/HTML-%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jackzhang9.github.io/tags/python/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -53,5 +60,12 @@
   </url>
   
 
+  
+  <url>
+    <loc>https://jackzhang9.github.io/categories/%E5%89%8D%E7%AB%AF-HTML/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
