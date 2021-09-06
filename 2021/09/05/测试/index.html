@@ -387,29 +387,51 @@
   
   
     <div id="gitalk-container"></div>
-    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
+    <div id="gitalk-container"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 
-if(true){
- var gitalk = new Gitalk({
-   clientID: 'ac35736c47d7faeda076',
-   clientSecret: 'ef5e2a8633d58290f9851b08f63cd35f89c6cf4c',
-   repo: 'https://github.com/JackZhang9/store_comments',
-   owner: 'JackZhang9',
-   admin: ['[&#39;store_comments&#39;,&#39;store_comments&#39;]'],
-   id: 'Sun Sep 05 2021 17:23:46 GMT+0800',
-   distractionFreeMode: 'true'
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
 })
+
 gitalk.render('gitalk-container')
-}
 </script>
 
+
   
 
   
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+
+  
+
 
 
           </div>
