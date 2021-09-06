@@ -43,7 +43,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: #00000"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -52,6 +52,8 @@
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">学无止境</p>
 		
 
 		<nav class="header-menu">
@@ -75,6 +77,9 @@
 	        
 			</ul>
 		</nav>
+		<nav>
+			总文章数 5
+		</nav>
 		<nav class="header-smart-menu">
     		
     			
@@ -86,7 +91,7 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">算法极客</a>
     			
             
 		</nav>
@@ -114,7 +119,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: #00000"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -126,6 +131,8 @@
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>学无止境<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -585,7 +592,7 @@ MathJax.Hub.Queue(function() {
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">算法极客</a></li>
       
         
     </ul>
