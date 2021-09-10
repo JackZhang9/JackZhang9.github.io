@@ -72,7 +72,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 9
+			总文章数 10
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -402,11 +402,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -476,24 +476,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一-什么是线性回归模型？"><a href="#一-什么是线性回归模型？" class="headerlink" title="一.什么是线性回归模型？"></a>一.什么是线性回归模型？</h2><pre><code>根据数据建立回归模型，w1*x1+w2*x2+...+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。(一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸)
-</code></pre>
+        <h2 id="一-什么是线性回归模型？"><a href="#一-什么是线性回归模型？" class="headerlink" title="一.什么是线性回归模型？"></a>一.什么是线性回归模型？</h2><h2 id="根据数据建立回归模型，w1x1-w2x2-…-b-y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。-一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸"><a href="#根据数据建立回归模型，w1x1-w2x2-…-b-y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。-一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸" class="headerlink" title="根据数据建立回归模型，w1x1+w2x2+…+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。(一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸)"></a>根据数据建立回归模型，w1<em>x1+w2</em>x2+…+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。(一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸)</h2><h2 id="二-如何训练线性回归模型？"><a href="#二-如何训练线性回归模型？" class="headerlink" title="二.如何训练线性回归模型？"></a>二.如何训练线性回归模型？</h2><p>1.举例实验：假设在二维坐标系里随机生成100个点，且只有一个特征x，自然也只有一个权重w和一个偏置b，假设权重w为0.7，偏置b为0.8，则线性回归模型为：0.7*x+0.8=y<br>2.需要的工具：tensorflow框架(一个开源深度学习框架，可用来计算多维数组/矩阵数据)<br>pycharm(python的一个IDE)</p>
 <hr>
-<h2 id="二-如何训练线性回归模型？"><a href="#二-如何训练线性回归模型？" class="headerlink" title="二.如何训练线性回归模型？"></a>二.如何训练线性回归模型？</h2><pre><code>1.举例实验：假设在二维坐标系里随机生成100个点，且只有一个特征x，自然也只有一个权重w和一个偏置b，假设权重w为0.7，偏置b为0.8，则线性回归模型为：0.7*x+0.8=y
-2.需要的工具：tensorflow框架(一个开源深度学习框架，可用来计算多维数组/矩阵数据)
-pycharm(python的一个IDE)
-</code></pre>
+<p>3.实验流程：<br>    1.随机生成100个样本<br>    2.建立线性模型-初始化权重w和偏置b<br>    3.确定损失函数-均方误差(L2损失函数/n)<br>    4.优化损失-梯度下降法（指定超参数）</p>
 <hr>
-<pre><code>3.实验流程：
-    1.随机生成100个样本
-    2.建立线性模型-初始化权重w和偏置b
-    3.确定损失函数-均方误差(L2损失函数/n)
-    4.优化损失-梯度下降法（指定超参数）
-</code></pre>
-<hr>
-<pre><code>4.实验代码：
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    </span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>4.实验代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <hr>
 
       
@@ -777,6 +765,97 @@ pycharm(python的一个IDE)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/09/06/%E6%B5%8B%E8%AF%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构与算法之队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E9%98%9F%E5%88%97/">数据结构与算法之队列</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E9%98%9F%E5%88%97/" class="archive-article-date">
+  	<time datetime="2021-09-10T12:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
+</a>
+        
+    
+    
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">队列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E9%98%9F%E5%88%97/">展开全文 >></a>
         </p>
       
 
@@ -1313,11 +1392,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
