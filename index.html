@@ -218,8 +218,8 @@
         <h2 id="一-什么是数组？"><a href="#一-什么是数组？" class="headerlink" title="一 什么是数组？"></a>一 什么是数组？</h2><p>数组是一种顺序表，在内存中是一串连续的一套地址，用来存储数据，是1对1的数据结构。<br>在python中，数组list是天生的动态数组，在java里面叫做arraylist。</p>
 <hr>
 <h2 id="二-数组中元素如何存储？"><a href="#二-数组中元素如何存储？" class="headerlink" title="二 数组中元素如何存储？"></a>二 数组中元素如何存储？</h2><p>连续存储。 <br><br>在java或者C++中，数组只能存放同一种类型的数据，但python中可以存放<strong>各种类型数据</strong>。 <br><br>这是<strong>因为python数组中存放的是数据存放的地址</strong>，地址的数据类型是一样的，而数组中存放地址的<strong>地址自然也是连续</strong>的，这样就实现了用数组存放各种类型数据。 <br><br>但同时也会造成一个问题，就是花费了更大的存储开销，而且当要用到2维数组即矩阵，或者更高维数组如n维张量时，这种结构显然低效，而且<strong>python也不支持多维数组</strong>，也没有各种运算函数，但用C语言写的numpy解决了这些问题，<strong>numpy支持n维数组</strong>，即支持ndarray，因为最低是二维数组，二维数组即是矩阵，故可看作numpy支持矩阵以及矩阵运算，也就是说，哪怕在numpy写一个1维数组，那它也是行矩阵或列矩阵，当然三维数组就是将矩阵(二维数组)放在了一个更大的数组里面，可依次类推。 <br><br>同时<strong>numpy</strong>也支持各种针对n维数组的运算，提供大量<strong>n维数组运算</strong>的函数库。但是<strong>numpy是不支持gpu加速运算的</strong>，因此使用tensorflow通过gpu加速。一般当数组维度达到3维及以上时，可以叫做<strong>张量(tensor)</strong>. <br><br>在<strong>tensorflow</strong>中，所有数组都可以叫做<strong>tensor</strong>， <br><br>如:<strong>1维数组=1维张量，二维数组=矩阵=2维张量，三维数组=3维张量</strong>，依此类推。<br><br>因此业界一般使用tensorflow-gpu来进行张量计算，但是numpy可用来进行数据预处理，并且numpy的ndarray也能被tensorflow转化为tensor使用。    <br><br><strong>一维数组存储地址计算：a[i]为，数组首地址+i*一个数组元素字节所占长度。</strong></p>
-<h2 id="三-python数组的基本操作"><a href="#三-python数组的基本操作" class="headerlink" title="三 python数组的基本操作"></a>三 python数组的基本操作</h2><p><strong>1.增加元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|—|—|—|<br>|1.尾部增加|list.append(‘item’)|O(1)|<br>|2.头部增加|list.insert(0,’item’)|O(n)|<br>|3.中间增加|list.insert(2,’item’)|O(n)| </p>
-<p><strong>2.删除元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|—|—|—|<br>|1.尾部删除|list.pop()|O(1)|<br>|2.头部删除|list.pop(0)|O(n)|<br>|3.中间删除|list.pop(2)|O(n)|</p>
+<h2 id="三-python数组的基本操作"><a href="#三-python数组的基本操作" class="headerlink" title="三 python数组的基本操作"></a>三 python数组的基本操作</h2><p><strong>1.增加元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|:—:   |:—:                |:—:|<br>|尾部增加|list.append(‘item’)  |O(1)|<br>|头部增加|list.insert(0,’item’)|O(n)|<br>|中间增加|list.insert(2,’item’)|O(n)| </p>
+<p><strong>2.删除元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|:—:   |:—:      |:—:|<br>|尾部删除|list.pop()  |O(1)|<br>|头部删除|list.pop(0)|O(n)|<br>|中间删除|list.pop(2)|O(n)|</p>
 <p><strong>3.修改元素</strong>：时间复杂度O(1),按索引修改 <br><br>    如:list[0] = ‘item2’ <br><br><strong>4.查找元素</strong>：时间复杂度O(1),按索引查找， <br><br>    如：list[0] = ‘item2’</p>
 <p><strong>为什么python数组增删时间复杂度是O(n)?</strong> <br><br>因为增删时数据的拷贝覆盖，如头部增加就要把所有数组元素向后移动一个位置，然后再把元素增加到头部，中间增加是相同的道理。 <br><br>基于此，若增删操作很少，查改操作很多，又不会out of memory，可采用数组存储数据。</p>
 
@@ -1108,6 +1108,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日志</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
@@ -1125,18 +1137,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日志</a>
               </li>
             
             <div class="clearfix"></div>
