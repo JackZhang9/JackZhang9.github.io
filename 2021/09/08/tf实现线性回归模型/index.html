@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://JackZhang9.github.io">
   <title>tf实现线性回归模型 | 杰克的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一.什么是线性回归模型？ 根据数据建立回归模型，w1x1+w2x2+…+b&#x3D;y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。  一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。  MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆">
+  <meta name="description" content="一.什么是线性回归模型？ 根据数据建立回归模型，w1x1+w2x2+…+b&#x3D;y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。 一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。 MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tf实现线性回归模型">
 <meta property="og:url" content="https://jackzhang9.github.io/2021/09/08/tf%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="杰克的博客">
-<meta property="og:description" content="一.什么是线性回归模型？ 根据数据建立回归模型，w1x1+w2x2+…+b&#x3D;y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。  一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。  MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆">
+<meta property="og:description" content="一.什么是线性回归模型？ 根据数据建立回归模型，w1x1+w2x2+…+b&#x3D;y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。 一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。 MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-08T08:54:42.000Z">
-<meta property="article:modified_time" content="2021-09-10T12:44:00.869Z">
+<meta property="article:modified_time" content="2021-09-10T12:51:48.053Z">
 <meta property="article:author" content="JackZhang9">
 <meta property="article:tag" content="tensorflow">
 <meta property="article:tag" content="线性回归">
@@ -227,22 +227,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一-什么是线性回归模型？"><a href="#一-什么是线性回归模型？" class="headerlink" title="一.什么是线性回归模型？"></a>一.什么是线性回归模型？</h2><ul>
-<li><p>根据数据建立回归模型，w1<em>x1+w2</em>x2+…+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。</p>
-</li>
-<li><p>一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。</p>
-</li>
-<li><p>MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸.</p>
-</li>
+<li>根据数据建立回归模型，w1<em>x1+w2</em>x2+…+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。</li>
+<li>一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。</li>
+<li>MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸.</li>
 </ul>
 <hr>
-<h2 id="二-如何训练线性回归模型？"><a href="#二-如何训练线性回归模型？" class="headerlink" title="二.如何训练线性回归模型？"></a>二.如何训练线性回归模型？</h2><p><strong>1.举例实验：</strong> <br><br>    假设在二维坐标系里随机生成100个点，且只有一个特征x，自然也只有一个权重w和一个偏置b，假设权重w为0.7，偏置b为0.8，则线性回归模型为：<br><br>    <strong>0.7*x+0.8=y</strong> <br><br><strong>2.需要的工具：</strong> <br><br>    tensorflow框架(一个开源深度学习框架，可用来计算多维数组/矩阵数据) <br><br>    pycharm(python的一个IDE)</p>
+<h2 id="二-如何训练线性回归模型？"><a href="#二-如何训练线性回归模型？" class="headerlink" title="二.如何训练线性回归模型？"></a>二.如何训练线性回归模型？</h2><p><strong>1.举例实验：</strong><br>    假设在二维坐标系里随机生成100个点，且只有一个特征x，自然也只有一个权重w和一个偏置b，假设权重w为0.7，偏置b为0.8，则线性回归模型为：<br>    <strong>0.7*x+0.8=y</strong><br><strong>2.需要的工具：</strong><br>    tensorflow框架(一个开源深度学习框架，可用来计算多维数组/矩阵数据) <br><br>    pycharm(python的一个IDE)</p>
 <hr>
-<p><strong>3.实验流程：</strong> <br></p>
-<pre><code>1.随机生成100个样本
-2.建立线性模型-初始化权重w和偏置b
-3.确定损失函数-均方误差(L2损失函数/n)
-4.优化损失-梯度下降法（指定超参数）
-</code></pre>
+<p><strong>3.实验流程：</strong> <br><br>1.随机生成100个样本<br>2.建立线性模型-初始化权重w和偏置b<br>3.确定损失函数-均方误差(L2损失函数/n)<br>4.优化损失-梯度下降法（指定超参数）</p>
 <hr>
 <p><strong>4.实验代码：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
@@ -661,15 +653,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,6 +674,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
