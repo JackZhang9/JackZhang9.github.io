@@ -72,7 +72,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 8
+			总文章数 9
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -585,6 +585,78 @@
 
 
   
+    <article id="post-数据结构与算法之栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/">数据结构与算法之栈</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/" class="archive-article-date">
+  	<time datetime="2021-09-10T06:35:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
+</a>
+        
+    
+    
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据结构与算法之时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -669,7 +741,7 @@
 <p><strong>2.for循环语句：</strong><br>    先看<strong>循环体</strong>的时间复杂度，假设循环体的时间复杂度是O(n),<strong>循环次数</strong>为m，即循环的时间复杂度为O(n x m)。   <br><br>    若是<strong>多层嵌套for循环</strong>，同样想看<strong>循环体</strong>，假设循环体的时间复杂度为O(n)，各个循环的<strong>循环次数</strong>分别是m,i,j,k，即循环的时间复杂度为O(n x m x i x j x k)。  <br><br>    分析时要<strong>从内向外</strong>分析。</p>
 <p><strong>3.if else条件语句：</strong><br>    总的时间复杂度等于条件语句中<strong>时间复杂度最大的那条路径</strong>的时间复杂度。如O(n)，O(n<sup>2</sup>)，即为(n<sup>2</sup>)。</p>
 <p>经验：一般函数体有减半这个步骤，时间复杂度会是logn。<br>以二分法查找举例:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span>(<span class="params">arr,key</span>):</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    end = <span class="built_in">len</span>(arr)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> start &lt;= end:</span><br><span class="line">        mid = (start+end)/<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> arr[mid] &lt; key:</span><br><span class="line">            start = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> arr[mid] &gt; key:</span><br><span class="line">            end = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span>(<span class="params">arr,key</span>):</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    end = <span class="built_in">len</span>(arr)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> start &lt;= end:</span><br><span class="line">        mid = (end-start)//<span class="number">2</span> + start</span><br><span class="line">        <span class="keyword">if</span> arr[mid] &lt; key:</span><br><span class="line">            start = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> arr[mid] &gt; key:</span><br><span class="line">            end = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>前提是有序数组。</p>
 
       
@@ -1152,6 +1224,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
@@ -1169,10 +1245,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
               </li>
              
               <li class="article-tag-list-item">
