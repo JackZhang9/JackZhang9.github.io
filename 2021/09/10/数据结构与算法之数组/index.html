@@ -6,16 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://JackZhang9.github.io">
-  <title>Tag: 机器学习 | 杰克的博客</title>
+  <title>数据结构与算法之数组 | 杰克的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录工作生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="杰克的博客">
-<meta property="og:url" content="https://jackzhang9.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+  <meta name="description" content="一 什么是数组？数组是一种顺序表，在内存中是一串连续的一套地址，用来存储数据，是1对1的数据结构。在python中，数组list是天生的动态数组，在java里面叫做arraylist。  二 数组中元素如何存储？连续存储。 在java或者C++中，数组只能存放同一种类型的数据，但python中可以存放各种类型数据。 这是因为python数组中存放的是数据存放的地址，地址的数据类型是一样的，而数组中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之数组">
+<meta property="og:url" content="https://jackzhang9.github.io/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="杰克的博客">
-<meta property="og:description" content="记录工作生活">
+<meta property="og:description" content="一 什么是数组？数组是一种顺序表，在内存中是一串连续的一套地址，用来存储数据，是1对1的数据结构。在python中，数组list是天生的动态数组，在java里面叫做arraylist。  二 数组中元素如何存储？连续存储。 在java或者C++中，数组只能存放同一种类型的数据，但python中可以存放各种类型数据。 这是因为python数组中存放的是数据存放的地址，地址的数据类型是一样的，而数组中">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-09T23:57:41.000Z">
+<meta property="article:modified_time" content="2021-09-10T02:38:56.096Z">
 <meta property="article:author" content="JackZhang9">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="杰克的博客" type="application/atom+xml">
@@ -188,86 +193,290 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+    <i class="fa fa-thumb-tack"></i>
+    <font color=7D26CD>置顶</font>
+    <span class="post-meta-divider">|</span>
+
+<article id="post-数据结构与算法之数组" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2021-09-06T10:50:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95/">机器学习应用领域小结</a>
+    <h1 class="article-title" itemprop="name">
+      数据结构与算法之数组
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%95%B0%E7%BB%84/" class="archive-article-date">
+  	<time datetime="2021-09-09T23:57:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
+</a>
+        
+    
+    
+        
+          <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-什么是数组？"><a href="#一-什么是数组？" class="headerlink" title="一 什么是数组？"></a>一 什么是数组？</h2><p>数组是一种顺序表，在内存中是一串连续的一套地址，用来存储数据，是1对1的数据结构。<br>在python中，数组list是天生的动态数组，在java里面叫做arraylist。</p>
+<hr>
+<h2 id="二-数组中元素如何存储？"><a href="#二-数组中元素如何存储？" class="headerlink" title="二 数组中元素如何存储？"></a>二 数组中元素如何存储？</h2><p>连续存储。 <br><br>在java或者C++中，数组只能存放同一种类型的数据，但python中可以存放<strong>各种类型数据</strong>。 <br><br>这是<strong>因为python数组中存放的是数据存放的地址</strong>，地址的数据类型是一样的，而数组中存放地址的<strong>地址自然也是连续</strong>的，这样就实现了用数组存放各种类型数据。 <br><br>但同时也会造成一个问题，就是花费了更大的存储开销，而且当要用到2维数组即矩阵，或者更高维数组如n维张量时，这种结构显然低效，而且<strong>python也不支持多维数组</strong>，也没有各种运算函数，但用C语言写的numpy解决了这些问题，<strong>numpy支持n维数组</strong>，即支持ndarray，因为最低是二维数组，二维数组即是矩阵，故可看作numpy支持矩阵以及矩阵运算，也就是说，哪怕在numpy写一个1维数组，那它也是行矩阵或列矩阵，当然三维数组就是将矩阵(二维数组)放在了一个更大的数组里面，可依次类推。 <br><br>同时<strong>numpy</strong>也支持各种针对n维数组的运算，提供大量<strong>n维数组运算</strong>的函数库。但是<strong>numpy是不支持gpu加速运算的</strong>，因此使用tensorflow通过gpu加速。一般当数组维度达到3维及以上时，可以叫做<strong>张量(tensor)</strong>. <br><br>在<strong>tensorflow</strong>中，所有数组都可以叫做<strong>tensor</strong>， <br><br>如:<strong>1维数组=1维张量，二维数组=矩阵=2维张量，三维数组=3维张量</strong>，依此类推。<br><br>因此业界一般使用tensorflow-gpu来进行张量计算，但是numpy可用来进行数据预处理，并且numpy的ndarray也能被tensorflow转化为tensor使用。    <br><br><strong>一维数组存储地址计算：a[i]为，数组首地址+i*一个数组元素字节所占长度。</strong></p>
+<h2 id="三-python数组的基本操作"><a href="#三-python数组的基本操作" class="headerlink" title="三 python数组的基本操作"></a>三 python数组的基本操作</h2><p><strong>1.增加元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|—|—|—|<br>|1.尾部增加|list.append(‘item’)|O(1)|<br>|2.头部增加|list.insert(0,’item’)|O(n)|<br>|3.中间增加|list.insert(2,’item’)|O(n)| </p>
+<p><strong>2.删除元素分3种：</strong><br>|增加方式|代码|时间复杂度|<br>|—|—|—|<br>|1.尾部删除|list.pop()|O(1)|<br>|2.头部删除|list.pop(0)|O(n)|<br>|3.中间删除|list.pop(2)|O(n)|</p>
+<p><strong>3.修改元素</strong>：时间复杂度O(1),按索引修改 <br><br>    如:list[0] = ‘item2’ <br><br><strong>4.查找元素</strong>：时间复杂度O(1),按索引查找， <br><br>    如：list[0] = ‘item2’</p>
+<p><strong>为什么python数组增删时间复杂度是O(n)?</strong> <br><br>因为增删时数据的拷贝覆盖，如头部增加就要把所有数组元素向后移动一个位置，然后再把元素增加到头部，中间增加是相同的道理。 <br><br>基于此，若增删操作很少，查改操作很多，又不会out of memory，可采用数组存储数据。</p>
+
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习//" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://jackzhang9.github.io/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%95%B0%E7%BB%84/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/09/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构与算法之时间复杂度</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="数据结构与算法之数组" data-title="数据结构与算法之数组" data-url="https://JackZhang9.github.io/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%95%B0%E7%BB%84/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://JackZhang9.github.io/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%95%B0%E7%BB%84/", 
+    sourceId: "数据结构与算法之数组",
+    productKey: "ture",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
+  
+    <div id="gitalk-container"></div>
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+
+  
+
+  
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+
+  
+
 
 
           </div>
@@ -323,9 +532,9 @@
 	var yiliaConfig = {
 		mathjax: ture,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
