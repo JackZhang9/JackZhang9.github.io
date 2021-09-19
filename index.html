@@ -72,7 +72,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 16
+			总文章数 17
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -188,6 +188,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-kaggle之电影情感分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/19/kaggle%E4%B9%8B%E7%94%B5%E5%BD%B1%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/">kaggle之电影情感分析</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/19/kaggle%E4%B9%8B%E7%94%B5%E5%BD%B1%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2021-09-19T11:55:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-19</time>
+</a>
+        
+    
+    
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="代码在下面"><a href="#代码在下面" class="headerlink" title="代码在下面"></a>代码在下面</h1><h2 id="LR完成的一个分类任务，自然语言处理，用到了pandas，sklearn，"><a href="#LR完成的一个分类任务，自然语言处理，用到了pandas，sklearn，" class="headerlink" title="LR完成的一个分类任务，自然语言处理，用到了pandas，sklearn，"></a>LR完成的一个分类任务，自然语言处理，用到了pandas，sklearn，</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_coding: utf-8 _*_</span></span><br><span class="line"><span class="comment"># @Time : 2021/9/19 16:03</span></span><br><span class="line"><span class="comment"># @Author : CN-JackZhang</span></span><br><span class="line"><span class="comment"># @File: 语义分割.py</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">&#x27;display.max_columns&#x27;</span>,<span class="number">10</span>,<span class="string">&#x27;display.width&#x27;</span>, <span class="number">200</span>)</span><br><span class="line"><span class="comment">#EDA</span></span><br><span class="line">data_train = pd.read_csv(<span class="string">&#x27;../data/train.tsv&#x27;</span>,sep=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">data_test = pd.read_csv(<span class="string">&#x27;../data/test.tsv&#x27;</span>,sep=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print(data_train.head())</span></span><br><span class="line"><span class="comment"># PhraseId  SentenceId                                             Phrase  Sentiment</span></span><br><span class="line"><span class="comment"># 0         1           1  A series of escapades demonstrating the adage ...          1</span></span><br><span class="line"><span class="comment"># 1         2           1  A series of escapades demonstrating the adage ...          2</span></span><br><span class="line"><span class="comment"># 2         3           1                                           A series          2</span></span><br><span class="line"><span class="comment"># 3         4           1                                                  A          2</span></span><br><span class="line"><span class="comment"># 4         5           1                                             series          2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#构建语料库</span></span><br><span class="line">train_sentences = data_train[<span class="string">&#x27;Phrase&#x27;</span>]</span><br><span class="line">test_sentences = data_test[<span class="string">&#x27;Phrase&#x27;</span>]</span><br><span class="line">sentences = pd.concat([train_sentences,test_sentences])</span><br><span class="line"><span class="comment">#提取训练集标签</span></span><br><span class="line">label = data_train[<span class="string">&#x27;Sentiment&#x27;</span>]</span><br><span class="line"><span class="comment">#导入停词库</span></span><br><span class="line">stop_words = <span class="built_in">open</span>(<span class="string">&#x27;../data/stop_words_english.txt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>).read().splitlines()</span><br><span class="line"></span><br><span class="line"><span class="comment">#3种模型分析</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line">tf = TfidfVectorizer(</span><br><span class="line">    analyzer=<span class="string">&#x27;word&#x27;</span>,</span><br><span class="line">    ngram_range=(<span class="number">1</span>,<span class="number">4</span>),</span><br><span class="line">    max_features=<span class="number">150000</span></span><br><span class="line">)</span><br><span class="line">tf.fit(sentences)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(train_sentences,label,random_state=<span class="number">1234</span>)</span><br><span class="line">X_train=tf.transform(X_train)</span><br><span class="line">X_test=tf.transform(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#对tfidf处理后的文本进行机器学习</span></span><br><span class="line"><span class="comment"># from sklearn.model_selection import GridSearchCV</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="comment"># param_grid = &#123;&#x27;C&#x27;:range(1,10)&#125;</span></span><br><span class="line">lr = LogisticRegression(C=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># lr_gird = GridSearchCV(lr,param_grid=param_grid,cv=3,n_jobs=-1)</span></span><br><span class="line">lr.fit(X_train,y_train)</span><br><span class="line"><span class="comment"># print(lr.score(X_test,y_test))</span></span><br><span class="line"><span class="comment"># 0.640958605664488</span></span><br><span class="line"><span class="comment"># 0.6542099192618224 C=3</span></span><br><span class="line">test_X = tf.transform(data_test[<span class="string">&#x27;Phrase&#x27;</span>])</span><br><span class="line">predictions = lr.predict(test_X)</span><br><span class="line"><span class="comment"># print(predictions,predictions.shape)</span></span><br><span class="line">data_test.loc[:,<span class="string">&#x27;Sentiment&#x27;</span>] = predictions</span><br><span class="line"><span class="comment"># print(data_test.head())</span></span><br><span class="line">final_data = data_test.loc[:,[<span class="string">&#x27;PhraseId&#x27;</span>,<span class="string">&#x27;Sentiment&#x27;</span>]]</span><br><span class="line">final_data.to_csv(<span class="string">&#x27;final_data.csv&#x27;</span>,index=<span class="literal">None</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>小结</strong>：最终在kaggle上打分0.59940，这是用lr做的一个分类，后续准备用循环神经网络来做，进一步优化。</p>
+
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">电影情感分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/19/kaggle%E4%B9%8B%E7%94%B5%E5%BD%B1%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-数据结构与算法之排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1158,111 +1253,6 @@
 
 
   
-    <article id="post-tf实现线性回归模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/08/tf%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/">tf实现线性回归模型</a>
-    </h1>
-  
-
-        
-        <a href="/2021/09/08/tf%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-09-08T08:54:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-08</time>
-</a>
-        
-    
-    
-        
-    
-    
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-什么是线性回归模型？"><a href="#一-什么是线性回归模型？" class="headerlink" title="一.什么是线性回归模型？"></a>一.什么是线性回归模型？</h2><ul>
-<li>根据数据建立回归模型，w1<em>x1+w2</em>x2+…+b=y，通过真实值和预测值之间的差值建立残差，使用梯度下降法来优化得到损失最小时对应的权重和偏置。</li>
-<li>一般使用MSE均方误差损失函数，因为有个平方，则处处可导，求导方便。</li>
-<li>MSE最小值为预测值是目标值的位置，随着误差的增大，损失函数的值增加更迅速，也因此，当函数的预测值离真实值较远时，使用梯度下降法求解梯度很大，会导致梯度爆炸.</li>
-</ul>
-<hr>
-<h2 id="二-如何训练线性回归模型？"><a href="#二-如何训练线性回归模型？" class="headerlink" title="二.如何训练线性回归模型？"></a>二.如何训练线性回归模型？</h2><p><strong>1.举例实验：</strong><br>    假设在二维坐标系里随机生成100个点，且只有一个特征x，自然也只有一个权重w和一个偏置b，假设权重w为0.7，偏置b为0.8，则线性回归模型为：<br>    <strong>0.7*x+0.8=y</strong><br><strong>2.需要的工具：</strong><br>    tensorflow框架(一个开源深度学习框架，可用来计算多维数组/矩阵数据) <br><br>    pycharm(python的一个IDE)</p>
-<hr>
-<p><strong>3.实验流程：</strong> <br><br>1.随机生成100个样本<br>2.建立线性模型-初始化权重w和偏置b<br>3.确定损失函数-均方误差(L2损失函数/n)<br>4.优化损失-梯度下降法（指定超参数）</p>
-<hr>
-<p><strong>4.实验代码：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-
-      
-      
-
-  <div class="declare" hidden="hidden"></div>
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性回归</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/08/tf%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1414,6 +1404,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">电影情感分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CV</a>
               </li>
              
@@ -1423,14 +1421,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1446,6 +1436,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
@@ -1454,11 +1448,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1466,27 +1460,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">机器学习算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日志</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1510,15 +1484,39 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">机器学习算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日志</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
               </li>
             
             <div class="clearfix"></div>
