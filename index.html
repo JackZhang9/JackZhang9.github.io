@@ -616,8 +616,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一-CNN和RNN区别"><a href="#一-CNN和RNN区别" class="headerlink" title="一 CNN和RNN区别"></a>一 CNN和RNN区别</h2><p>CNN用于处理图片，提取图像特征方法，没有时序概念，不考虑数据之间的关联性，没有记忆能力，输入和输出格式都是固定的，<br>RNN用于处理时序数据，某一时刻输出和当前时刻还和之前某几个时刻的输出相关，有记忆能力，做语音识别或机器翻译时，如：处理一句话，RNN提取特征时会考虑某个词和前后词的关系。<br>如：进行图像识别时，我们并不在意前一个决策结果是什么，用CNN，但是自然语言处理时，上一个词很大程度影响了下一个词，”词不离句”，这是有相关性的，用RNN。<br>这两者结合起来，就是CNN=眼睛，RNN=嘴巴耳朵。</p>
-<h1 id="RNN公式推导"><a href="#RNN公式推导" class="headerlink" title="RNN公式推导"></a>RNN公式推导</h1><p>最简单的RNN，有一个上个传递值，当前输入，然后经过一个线性组合，</p>
+        <h2 id="一-神经网络？"><a href="#一-神经网络？" class="headerlink" title="一 神经网络？"></a>一 神经网络？</h2><p>说到神经网络，先说神经网络解决的两个大的问题，分类和回归。</p>
+<p><strong>回归问题</strong>，预测出一个连续数值，神经网络是怎么做的？首先，确定几层hidden layer，每层隐藏层有多少个神经元，如2层隐藏层，第一层32各神经元，第二层64各神经元，在输入层确定输入的特征向量，特征有多少维，就有多少个输入节点，如特征总共15维，就有15个输入节点，这15个特征值乘以对应权重，组成一个线性回归模型，然后经过relu激活函数激活，成为神经元节点的值，对每一个神经元进行这个操作，确定输出层一个节点，是倒数第二层隐藏层所有神经元乘以对应权重的线性回归模型，得到输出值，一次前向传播完成，预测值和标签值是有误差的，用MSE均方差来衡量这个误差大小，同时这是一个2次函数，所以是凸函数，有全局最小值，开始优化模型参数，梯度下降法（数据量大就用随机梯度下降，数据量小可以用批量梯度下降），原理是，以3层隐藏层举例，第2层隐藏层函数由第一层含权重w1组成，第3层隐藏层函数由第2层和第1层权重w2和w1组成，于是，对w3求一阶偏导得到第3层权重w3的梯度，对该梯度再求w2的梯度得第2层w2的梯度，同理得w1梯度，根据链式法则，因此w3的值是根据w2得到，w2由w1得到，得到梯度后，开始沿着负梯度方向以特定步长(步长大小应该先大后小)开始迭代更新参数，直至MSE最小，当MSE逐渐稳定时，输出此时的模型参数，模型训练完毕。</p>
+<p>设计一个回归神经网络模型：先初始化一批权重向量，拥有一篇特征向量(即训练数据)，1.设计一个线性回归模型，2.设计一个relu激活函数用来激活，3.设计一个求输出层值的函数，4.设计一个MSE函数求预测值与真实值的MSE，作为损失函数，5.设计一个求关于权重参数的偏导函数，6.设计一个迭代权重参数函数，迭代更新每一个权重参数</p>
+<p>神经网络层数一般1~2层隐藏层即可很好拟合，强如yolov1也只用了2层全连接神经网络。</p>
+<p><strong>分类问题</strong>，预测一个概率值，它会预测出Item是属于哪个分类的概率，如yolov1中，就是预测20个种类的item的概率，神经网络是怎么做的？首先，是确定几层hiddenlayer，每层隐藏层有多少个神经元，然后确定输入的特征向量有多少维度，就有多少输入节点，乘以对应权重参数，组成一个线性回归模型，然后经过sigmoid激活函数激活，（这里sigmoid函数输出值正好是(0,1)之间，正好是一个概率的取值，故用sigmoid函数），成为神经元节点的值，对每一个神经元进行这个操作，确定输出层的多个节点，如20分类就有20个输出节点，倒数第二层所有神经元乘以对应权重，得到对应20个输出值，然后对20个输出值输入softmax操作，转换成20个item的每个Item的概率，而标签是一种分类，分类和概率无法衡量误差，回到神经网络核心，我们是要找到一组最能正确表现(既不过拟合也不欠拟合)模型的模型参数，问题转化为，我们希望找到一组参数，最大概率的生成当前样本，于是求得似然函数，取对数，然后加上负号除以样本个数变为损失函数（又叫交叉熵损失函数），求最大似然转化为求损失函数最小值，然后对每个权重参数求一阶偏导数，还是根据链式法则，求出所有权重参数的梯度，然后沿负梯度方向以特定步长开始迭代更新参数。</p>
+<p>设计一个分类神经网络模型：先初始化一批权重向量，拥有一篇特征向量(即训练数据)1.设计一个线性回归模型，2.设计一个sigmoid激活函数用来激活，3.设计一个softmax函数用来求各分类的概率，4.设计一个似然函数，后变成损失函数，5.设计一个求关于权重参数的偏导函数，6.设计一个迭代权重参数函数，迭代更新每一个权重参数</p>
+<h2 id="CNN和RNN区别"><a href="#CNN和RNN区别" class="headerlink" title="CNN和RNN区别"></a>CNN和RNN区别</h2><p>CNN用于处理图片，提取图像特征方法，没有时序概念，不考虑数据之间的关联性，没有记忆能力，输入和输出格式都是固定的，<br>RNN用于处理时序数据，某一时刻输出和当前时刻还和之前某几个时刻的输出相关，有记忆能力，做语音识别或机器翻译时，如：处理一句话，RNN提取特征时会考虑某个词和前后词的关系。<br>如：进行图像识别时，我们并不在意前一个决策结果是什么，用CNN，但是自然语言处理时，上一个词很大程度影响了下一个词，”词不离句”，这是有相关性的，用RNN。<br>这两者结合起来，就是CNN=眼睛，RNN=嘴巴耳朵。</p>
+<h1 id="RNN公式推导"><a href="#RNN公式推导" class="headerlink" title="RNN公式推导"></a>RNN公式推导</h1><p>最简单的RNN，有一个上个传递值，当前输入，然后经过一个线性组合。</p>
+<h2 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h2><p>1.过拟合原因：数据太少，模型太复杂。</p>
+<p>解决办法：1.增加训练数据；2.降低模型复杂度：增加正则化参数，约束权重参数不会太大；在神经网络中，dropout随机忽略掉一部分神经元，如dropout=0.2；在神经网络中，减少隐藏层和神经元个数。</p>
+<p>防止过拟合：加入正则化参数，</p>
+<p>过拟合表现：低偏差，高方差。偏差(预测值与实际值的偏差程度，即拟合能力)，方差(数据变化时的影响)。</p>
+<p>欠拟合原因：模型太简单。</p>
+<p>解决办法：增加新特征，减小正则化参数，使用更复杂的模型，如集成学习，深度学习模型。</p>
+<p>欠拟合表现：高偏差，低方差</p>
+<p>2.分类问题评价指标<br>对于二分类问题，可以用混淆矩阵，精确率和召回率，</p>
+<p>P=TP/(TP+FP),R=TP/(TP+FN)</p>
+<p>回归问题评价指标：MSE,MAE适用误差相对明显,RMSE适用误差不是很明显</p>
 
       
       
@@ -886,11 +902,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1184,15 +1200,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -1391,6 +1407,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CV</a>
               </li>
              
@@ -1400,22 +1424,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性回归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1435,6 +1443,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1443,11 +1467,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日志</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,43 +1515,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日志</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">机器学习算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
               </li>
              
               <li class="article-tag-list-item">
