@@ -634,6 +634,14 @@
 <p>2.分类问题评价指标<br>对于二分类问题，可以用混淆矩阵，精确率和召回率，</p>
 <p>P=TP/(TP+FP),R=TP/(TP+FN)</p>
 <p>回归问题评价指标：MSE,MAE适用误差相对明显,RMSE适用误差不是很明显</p>
+<p>两个思考题：<br>1.有25匹马，一个赛场，赛场有5个跑道，要比赛找出前3名，问充分必要条件最少需要多少场。<br>要求，不允许记时，可以推导，比如A&gt;B, B&gt;C =&gt; A&gt;C。<br>答案：7种，1.先分成5组ABCDE，跑出5个第一名(A1,B1,C1,D1,E1)，2.然后5个第一名跑一次，跑出全局第一名，3.去掉最后两个第一名的那两组，然后让全局第一名的第二名和5个第一名的2和3名的第2名，加起来5个一起跑，第1和1名就是全局第2和3名，共7次。<br>2.给一个方法，找出字符串中包含所有指定字母的最小子串？<br>如aaacbcaabdfafsfa中，包含字母ab的最小子串是ab，包含字母sbf的最小子串是bdfafs，不需要考虑顺序￼</p>
+<p>编程题python版本：<br>#编程题：两个有序（从小到大）单链表，合并为一个有序的单链表，不要使用递归<br>class ListNode:<br>  def <strong>init</strong>(self, x):<br>    self.val = x<br>    self.next = None<br>def mergeTwoLists(list1, list2):<br>  return None</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span>(<span class="params">list1, list2</span>):</span></span><br><span class="line">    cur_node = newhead = ListNode(<span class="number">0</span>)  <span class="comment"># newhead初始化新的头节点ListNode(0) ,val=0,cur_node表示当前节点</span></span><br><span class="line">    <span class="keyword">while</span> list1 <span class="keyword">and</span> list2:           <span class="comment"># 遍历链表，当l1或l2为空(走到尾节点)时跳出循环</span></span><br><span class="line">        <span class="keyword">if</span> list1.val &lt;= list1.val:  <span class="comment"># 当l1.val小于l2.val,cur_node指向l1，同时l1向前移动一步</span></span><br><span class="line">            cur_node.<span class="built_in">next</span> = list1</span><br><span class="line">            list1 = list1.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">else</span>:                        <span class="comment"># 否则，cur_node指向l2,同时l2向前移动一步</span></span><br><span class="line">            cur_node.<span class="built_in">next</span> = list2</span><br><span class="line">            list2 = list2.<span class="built_in">next</span></span><br><span class="line">        cur_node = cur_node.<span class="built_in">next</span>  <span class="comment"># cur_node向前移动一步</span></span><br><span class="line">    cur_node.<span class="built_in">next</span> = list1 <span class="keyword">if</span> list1 <span class="keyword">else</span> list2  <span class="comment"># 看尾节点，是l1还是l2，直接添加进链表尾部</span></span><br><span class="line">    <span class="keyword">return</span> newhead.<span class="built_in">next</span>              <span class="comment"># 头节点值为0，头节点后的剩余节点即为新的链表</span></span><br></pre></td></tr></table></figure>
+
+<p>#编程题：求二叉树中节点的最大距离，即二叉树中相距最远的两个节点之间的距离。<br>class TreeNode(object):<br>  def <strong>init</strong>(self, x):<br>    self.val = x<br>    self.left = None<br>    self.right = None<br>def GetMaxDistance(oNode):<br>  return 0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">max_distanse = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_max_height</span>(<span class="params">node</span>):</span></span><br><span class="line">    <span class="comment">#任一距离为由某节点出发，左右子树深度距离的路径组成。</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    left_max_height = get_max_height(node.left)  <span class="comment"># 左子树的最大高度</span></span><br><span class="line">    right_max_height = get_max_height(node.right) <span class="comment"># 右子树的最大高度</span></span><br><span class="line">    max_distance = <span class="built_in">max</span>(max_distanse,left_max_height+right_max_height) <span class="comment">#遍历每一个节点，迭代节点间最大的距离</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>+<span class="built_in">max</span>(left_max_height,right_max_height)  <span class="comment"># 返回节点深度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetMaxDistance</span>(<span class="params">Node</span>):</span></span><br><span class="line">    get_max_height(Node)</span><br><span class="line">    <span class="keyword">return</span> max_distanse</span><br></pre></td></tr></table></figure>
+<p>￼</p>
+<p>节点的最大距离，附图这棵树，返回4￼<br>￼￼</p>
 
       
       
@@ -1399,31 +1407,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">电影情感分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">线性回归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">目标检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1443,19 +1431,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">CV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">目标检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">电影情感分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1464,6 +1468,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1479,19 +1491,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,11 +1527,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
               </li>
             
             <div class="clearfix"></div>
