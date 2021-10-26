@@ -72,7 +72,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 19
+			总文章数 20
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -356,6 +356,127 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/09/19/kaggle%E4%B9%8B%E7%94%B5%E5%BD%B1%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-深度学习之卷积神经网络" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">深度学习之卷积神经网络</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="archive-article-date">
+  	<time datetime="2021-10-26T10:55:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+</a>
+        
+    
+    
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一-卷积-convolution-的概念"><a href="#一-卷积-convolution-的概念" class="headerlink" title="一. 卷积(convolution)的概念"></a>一. 卷积(convolution)的概念</h1><h3 id="卷积是一个使用卷积核-filter-对像素矩阵进行规划的过程。"><a href="#卷积是一个使用卷积核-filter-对像素矩阵进行规划的过程。" class="headerlink" title="卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。"></a>卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。</h3><p>具体为：<strong>在每层像素矩阵上按步长扫描下去，扫描到的像素矩阵和卷积核中对应位置元素做哈达玛积，然后再将得到的对应位置元素相加，即为卷积核一个扫描的输出值，卷积核扫描完一个像素矩阵上所有像素，得到一个新的特征图矩阵，也是这个卷积层的输出，一个卷积核相当于一个特征提取器，一个卷积核得到一个特征图(feature map)。</strong></p>
+<p>卷积核大小：<strong>3X3, 5X5；常用3X3的卷积核。</strong></p>
+<p>卷积中特征图大小计算公式：<br><em>w<sub>out</sub>=(w<sub>in</sub>+2xpadding-F+1)/stride</em></p>
+<p>此时，输入特征图大小与输出特征图大小一样，’SAME’,padding为特征图填充圈数，可知：当卷积核F=3时，padding=1，依此类推。</p>
+<p>卷积核元素：<strong>卷积核元素即是要训练的模型神经元参数，又叫权重(weight)。<br>具体为：首先随机初始化参数，训练模型时，即在反向传播时不断更新这些参数，直至寻找到最优参数。最优参数通过损失函数来评估。</strong></p>
+<p>像素矩阵：<strong>如何得到？彩色图像有RGB(red,green,blue)三个通道，即三个像素矩阵，各个像素矩阵用二维矩阵来表示，像素取值范围[0,255]，其中255为白色，0为黑色</strong></p>
+<p>卷积可以对原图像进行二次转化，提取特征图；相当于信号处理的滤波器，如拉普拉斯滤波(高通滤波器，保留高频边缘，用于边缘检测，需要用二阶导数)，高斯滤波，这些滤波器都可以写成卷积核形式，如拉普拉斯算子(中心位置数字-8，其余数字为1，目的系数之和为0)，拉普拉斯算子对噪声很敏感。</p>
+<h4 id="一阶导数计算梯度，用于线的检测"><a href="#一阶导数计算梯度，用于线的检测" class="headerlink" title="一阶导数计算梯度，用于线的检测"></a>一阶导数计算梯度，用于线的检测</h4><p>prewitt算子：<strong>检测水平，垂直，对角线；sobel算子：中心系数使用权重2，较好抑制噪声，检测水平，垂直，对角线。</strong></p>
+<h1 id="二-padding"><a href="#二-padding" class="headerlink" title="二. padding"></a>二. padding</h1><p>在进行卷积操作后，像素矩阵维度会变小，不方便计算，padding操作后卷积出来的特征图矩阵会核原矩阵尺寸一样。</p>
+<p><strong>具体为：给原始像素矩阵的四周添上一圈0。</strong></p>
+<h1 id="三-池化-pooling"><a href="#三-池化-pooling" class="headerlink" title="三. 池化(pooling)"></a>三. 池化(pooling)</h1><p>在进行卷积操作后，提取得到特征图，特征图中相邻区域中有相似特征信息(可以互相替代)，可以删去一部分冗余信息，减少参数数量并降低计算量，抑制了过拟合风险，同时保留了平移，旋转，尺度的不变性。</p>
+<p><strong>具体有：最大池化(max_pooling):(取局部领域中最大值。更好的保留纹理特征)和平均池化(mean_pooling)：(求局部领域所有值和的平均值。更好保留整体数据特征)。</strong></p>
+<p>常用的是最大池化。常用2x2的滤波器(filter)，2的步长(stride)进行扫描，特征图的高度(height)、宽度(width)减半，通道数不变。</p>
+<p>池化也增加了图像的感受野，提升了模型的能力。</p>
+<h2 id="池化层没有参数！！！"><a href="#池化层没有参数！！！" class="headerlink" title="池化层没有参数！！！"></a>池化层没有参数！！！</h2><h1 id="四-感受野-Receptive-Field"><a href="#四-感受野-Receptive-Field" class="headerlink" title="四. 感受野(Receptive Field)"></a>四. 感受野(Receptive Field)</h1><p><em>即特征图上一个像素对应回输入图像的区域大小。(需要通过卷积核尺寸和池化滤波器尺寸和步长计算)</em></p>
+<h3 id="感受野计算："><a href="#感受野计算：" class="headerlink" title="感受野计算："></a>感受野计算：</h3><p>思想：从最后一层特征图开始，从下往上的计算(倒着计算)。先计算最深层在前一层上的感受野，然后依此类推逐层推算到输入层(即第一层)。最后一层的特征图的感受野等于其卷积核的大小，第i层特征图的感受野大小和第i层的卷积核和步长相关，还和第i+1层的感受野大小相关。</p>
+<p>感受野计算公式：<em>RF<sub>i</sub> = (RF<sub>i+1</sub> - 1) x Stride<sub>i</sub> + Kernel<sub>i+1</sub></em></p>
+<p>其中：<strong>i是当前特征层的层数；RF<sub>i</sub>是第i层感受野大小；RF<sub>i+1</sub>是第i+1层感受野大小；Stride<sub>i</sub>是第i层卷积核步长；Kernel<sub>i+1</sub>是第i层卷积核尺寸大小。</strong><br>1个3x3卷积核感受野为3x3，2个3x3卷积核感受野为5x5，3个3x3卷积核感受野为7x7，n个3x3卷积核感受野为2n+1 x 2n+1，n为3x3卷积核个数；池化层卷积核一般为2x2，卷积层卷积核一般为3x3；</p>
+<p>若无池化，4个3x3卷积核感受野为9x9，而加入3个2x2卷积核的池化层后，感受野变为30x30，很明显感受野迅速增大。</p>
+<p>根据此特点，越深层的特征点描述的原图像信息越全面，可通过增加网络层数，增加池化层，和使用更大的卷积核来增加感受野。</p>
+<h3 id="有效感受野-Effective-Receptive-Field"><a href="#有效感受野-Effective-Receptive-Field" class="headerlink" title="有效感受野(Effective Receptive Field)"></a>有效感受野(Effective Receptive Field)</h3><p>实际的有效感受野是一个高斯分布，增大有效感受野：空洞卷积(不丢失分辨率(精确定位)，扩大感受野(检测分割大目标))。</p>
+<h3 id="空洞卷积-扩张卷积"><a href="#空洞卷积-扩张卷积" class="headerlink" title="空洞卷积/扩张卷积"></a>空洞卷积/扩张卷积</h3><p>空洞卷积：在相同计算条件下，提供了更大感受野。空洞位置填0.</p>
+<p>通过在原卷积核元素之间插入空格来使原卷积核扩张。扩张率(dilation rate)表示扩张程度。但是参数数量是一样的，不会增加卷积核的大小。</p>
+<p>比较：一个5x5大小的区域经过2次3x3的卷积后，变成一个像素点；一个13x13大小的区域经过2次3x3的空洞卷积后，变成了一个像素点。</p>
+<p>空洞卷积与普通卷积相比：卷积核大小一样，即参数数量一样，输出的特征图大小一样，区别在于空洞卷积在不做pooling损失信息的情况下有更大的感受野，</p>
+<p>扩张率：卷积核个元素之间间隔数量。显然普通卷积核的扩张率为0，感受野3x3；</p>
+<p>空洞卷积感受野计算公式：<br>F = (2<sup>log<sub>2</sub>rate+2</sup> - 1) x (2<sup>log<sub>2</sub>rate+2</sup> - 1)</p>
+<p>普通卷积，扩张率为1，感受野3x3；扩张率为2，感受野为7x7；扩张率为4，感受野为15x15；</p>
+<h1 id="五-Fletten"><a href="#五-Fletten" class="headerlink" title="五.Fletten"></a>五.Fletten</h1><p>将池化后的像素拉开，变成一维向量，方便输入到全连接层。</p>
+
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">展开全文 >></a>
         </p>
       
 
@@ -923,15 +1044,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -1157,118 +1278,6 @@
 
 
   
-    <article id="post-数据结构与算法之栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/">数据结构与算法之栈</a>
-    </h1>
-  
-
-        
-        <a href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/" class="archive-article-date">
-  	<time datetime="2021-09-10T06:35:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
-</a>
-        
-    
-    
-        
-    
-    
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-什么是栈-stack-？"><a href="#一-什么是栈-stack-？" class="headerlink" title="一 什么是栈(stack)？"></a>一 什么是栈(stack)？</h2><p>只允许在一端插入或删除的线性结构。先进后出，类似拿盘子一样，先放上去的盘子后被拿走，后放上去的盘子先被拿走(Last in First out)，即后进来的数据先出栈。</p>
-<p>栈可以用数组/链表实现，数组/链表长度即是栈的大小，分别叫顺序栈、链栈。</p>
-<p>在顺序栈中，栈底即为数组头部元素，栈顶即为数组尾部元素。</p>
-<h2 id="二-栈的常用操作"><a href="#二-栈的常用操作" class="headerlink" title="二 栈的常用操作"></a>二 栈的常用操作</h2><p>1.入栈：stack.push()</p>
-<p>2.出栈：stack.pop()</p>
-<p>3.判断栈是否为空：stack.is_empty()</p>
-<p>4.查看栈顶元素：stack.get_top()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span>      <span class="comment">#初始化，定义一个数组构成的顺序栈</span></span><br><span class="line">        self.stack = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self, element</span>):</span> <span class="comment">#入栈</span></span><br><span class="line">        self.stack.append(element)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span>           <span class="comment">#出栈</span></span><br><span class="line">        <span class="keyword">return</span> self.stack.pop()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_empty</span>(<span class="params">self</span>):</span>     <span class="comment">#判断栈是否为空</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">len</span>(self.stack):</span><br><span class="line">            <span class="keyword">return</span> ture</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> false</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_top</span>(<span class="params">self</span>):</span>      <span class="comment">#查看栈顶元素</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.stack)&gt;<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> self.stack[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="三-栈与递归"><a href="#三-栈与递归" class="headerlink" title="三 栈与递归"></a>三 栈与递归</h2><p>递归：调用函数自己。</p>
-<p>函数每往下递归一次，就会把运算结果放到栈中保存，直到程序执行到边界条件(递归出口)，然后会把保存在栈中的元素按照后进先出的顺序一个个返回，最终得到结果。</p>
-<p>以斐波那契数列为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span>(<span class="params">days</span>):</span></span><br><span class="line">    <span class="keyword">if</span> days == <span class="number">0</span>:       <span class="comment">#边界条件</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> days == <span class="number">1</span>:     <span class="comment">#边界条件</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        fib(days-<span class="number">1</span>) + fib(days-<span class="number">2</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在上式，只有当fib(days)分解到了fib(0)和fib(1)才会退出，一层一层返回运算的值。</p>
-<h2 id="在上个fib里，有大量的重复计算单元，可以考虑用一个记忆的字典记住，来减少重复计算"><a href="#在上个fib里，有大量的重复计算单元，可以考虑用一个记忆的字典记住，来减少重复计算" class="headerlink" title="在上个fib里，有大量的重复计算单元，可以考虑用一个记忆的字典记住，来减少重复计算"></a>在上个fib里，有大量的重复计算单元，可以考虑用一个记忆的字典记住，来减少重复计算</h2><h2 id="优化的fib数列"><a href="#优化的fib数列" class="headerlink" title="优化的fib数列"></a>优化的fib数列</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">record = &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">in</span> record:</span><br><span class="line">        <span class="keyword">return</span> record[n]</span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        record[n] = fib(n-<span class="number">1</span>) + fib(n-<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> record[n]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-      
-
-  <div class="declare" hidden="hidden"></div>
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1432,27 +1441,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性回归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">电影情感分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1472,11 +1465,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">电影情感分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1488,39 +1485,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日志</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">机器学习算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1544,15 +1521,51 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日志</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">卷积神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">机器学习算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">循环神经网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">图片测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">常见问题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">图片测试</a>
               </li>
             
             <div class="clearfix"></div>

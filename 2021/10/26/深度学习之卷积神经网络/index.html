@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://JackZhang9.github.io">
-  <title>Category: 机器学习 | 杰克的博客</title>
+  <title>深度学习之卷积神经网络 | 杰克的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录工作生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="杰克的博客">
-<meta property="og:url" content="https://jackzhang9.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+  <meta name="description" content="一. 卷积(convolution)的概念卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。具体为：在每层像素矩阵上按步长扫描下去，扫描到的像素矩阵和卷积核中对应位置元素做哈达玛积，然后再将得到的对应位置元素相加，即为卷积核一个扫描的输出值，卷积核扫描完一个像素矩阵上所有像素，得到一个新的特征图矩阵，也是这个卷积层的输出，一个卷积核相当于一个特征提取器，一个卷积核得到一个特征图(fea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习之卷积神经网络">
+<meta property="og:url" content="https://jackzhang9.github.io/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="杰克的博客">
-<meta property="og:description" content="记录工作生活">
+<meta property="og:description" content="一. 卷积(convolution)的概念卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。具体为：在每层像素矩阵上按步长扫描下去，扫描到的像素矩阵和卷积核中对应位置元素做哈达玛积，然后再将得到的对应位置元素相加，即为卷积核一个扫描的输出值，卷积核扫描完一个像素矩阵上所有像素，得到一个新的特征图矩阵，也是这个卷积层的输出，一个卷积核相当于一个特征提取器，一个卷积核得到一个特征图(fea">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-26T10:55:17.000Z">
+<meta property="article:modified_time" content="2021-10-26T16:57:49.727Z">
 <meta property="article:author" content="JackZhang9">
+<meta property="article:tag" content="卷积神经网络">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="杰克的博客" type="application/atom+xml">
@@ -188,86 +192,308 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+    <i class="fa fa-thumb-tack"></i>
+    <font color=7D26CD>置顶</font>
+    <span class="post-meta-divider">|</span>
+
+<article id="post-深度学习之卷积神经网络" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2021-09-06T10:50:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95/">机器学习应用领域小结</a>
+    <h1 class="article-title" itemprop="name">
+      深度学习之卷积神经网络
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="archive-article-date">
+  	<time datetime="2021-10-26T10:55:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+</a>
+        
+    
+    
+        
+          <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+    
+    
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一-卷积-convolution-的概念"><a href="#一-卷积-convolution-的概念" class="headerlink" title="一. 卷积(convolution)的概念"></a>一. 卷积(convolution)的概念</h1><h3 id="卷积是一个使用卷积核-filter-对像素矩阵进行规划的过程。"><a href="#卷积是一个使用卷积核-filter-对像素矩阵进行规划的过程。" class="headerlink" title="卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。"></a>卷积是一个使用卷积核(filter)对像素矩阵进行规划的过程。</h3><p>具体为：<strong>在每层像素矩阵上按步长扫描下去，扫描到的像素矩阵和卷积核中对应位置元素做哈达玛积，然后再将得到的对应位置元素相加，即为卷积核一个扫描的输出值，卷积核扫描完一个像素矩阵上所有像素，得到一个新的特征图矩阵，也是这个卷积层的输出，一个卷积核相当于一个特征提取器，一个卷积核得到一个特征图(feature map)。</strong></p>
+<p>卷积核大小：<strong>3X3, 5X5；常用3X3的卷积核。</strong></p>
+<p>卷积中特征图大小计算公式：<br><em>w<sub>out</sub>=(w<sub>in</sub>+2xpadding-F+1)/stride</em></p>
+<p>此时，输入特征图大小与输出特征图大小一样，’SAME’,padding为特征图填充圈数，可知：当卷积核F=3时，padding=1，依此类推。</p>
+<p>卷积核元素：<strong>卷积核元素即是要训练的模型神经元参数，又叫权重(weight)。<br>具体为：首先随机初始化参数，训练模型时，即在反向传播时不断更新这些参数，直至寻找到最优参数。最优参数通过损失函数来评估。</strong></p>
+<p>像素矩阵：<strong>如何得到？彩色图像有RGB(red,green,blue)三个通道，即三个像素矩阵，各个像素矩阵用二维矩阵来表示，像素取值范围[0,255]，其中255为白色，0为黑色</strong></p>
+<p>卷积可以对原图像进行二次转化，提取特征图；相当于信号处理的滤波器，如拉普拉斯滤波(高通滤波器，保留高频边缘，用于边缘检测，需要用二阶导数)，高斯滤波，这些滤波器都可以写成卷积核形式，如拉普拉斯算子(中心位置数字-8，其余数字为1，目的系数之和为0)，拉普拉斯算子对噪声很敏感。</p>
+<h4 id="一阶导数计算梯度，用于线的检测"><a href="#一阶导数计算梯度，用于线的检测" class="headerlink" title="一阶导数计算梯度，用于线的检测"></a>一阶导数计算梯度，用于线的检测</h4><p>prewitt算子：<strong>检测水平，垂直，对角线；sobel算子：中心系数使用权重2，较好抑制噪声，检测水平，垂直，对角线。</strong></p>
+<h1 id="二-padding"><a href="#二-padding" class="headerlink" title="二. padding"></a>二. padding</h1><p>在进行卷积操作后，像素矩阵维度会变小，不方便计算，padding操作后卷积出来的特征图矩阵会核原矩阵尺寸一样。</p>
+<p><strong>具体为：给原始像素矩阵的四周添上一圈0。</strong></p>
+<h1 id="三-池化-pooling"><a href="#三-池化-pooling" class="headerlink" title="三. 池化(pooling)"></a>三. 池化(pooling)</h1><p>在进行卷积操作后，提取得到特征图，特征图中相邻区域中有相似特征信息(可以互相替代)，可以删去一部分冗余信息，减少参数数量并降低计算量，抑制了过拟合风险，同时保留了平移，旋转，尺度的不变性。</p>
+<p><strong>具体有：最大池化(max_pooling):(取局部领域中最大值。更好的保留纹理特征)和平均池化(mean_pooling)：(求局部领域所有值和的平均值。更好保留整体数据特征)。</strong></p>
+<p>常用的是最大池化。常用2x2的滤波器(filter)，2的步长(stride)进行扫描，特征图的高度(height)、宽度(width)减半，通道数不变。</p>
+<p>池化也增加了图像的感受野，提升了模型的能力。</p>
+<h2 id="池化层没有参数！！！"><a href="#池化层没有参数！！！" class="headerlink" title="池化层没有参数！！！"></a>池化层没有参数！！！</h2><h1 id="四-感受野-Receptive-Field"><a href="#四-感受野-Receptive-Field" class="headerlink" title="四. 感受野(Receptive Field)"></a>四. 感受野(Receptive Field)</h1><p><em>即特征图上一个像素对应回输入图像的区域大小。(需要通过卷积核尺寸和池化滤波器尺寸和步长计算)</em></p>
+<h3 id="感受野计算："><a href="#感受野计算：" class="headerlink" title="感受野计算："></a>感受野计算：</h3><p>思想：从最后一层特征图开始，从下往上的计算(倒着计算)。先计算最深层在前一层上的感受野，然后依此类推逐层推算到输入层(即第一层)。最后一层的特征图的感受野等于其卷积核的大小，第i层特征图的感受野大小和第i层的卷积核和步长相关，还和第i+1层的感受野大小相关。</p>
+<p>感受野计算公式：<em>RF<sub>i</sub> = (RF<sub>i+1</sub> - 1) x Stride<sub>i</sub> + Kernel<sub>i+1</sub></em></p>
+<p>其中：<strong>i是当前特征层的层数；RF<sub>i</sub>是第i层感受野大小；RF<sub>i+1</sub>是第i+1层感受野大小；Stride<sub>i</sub>是第i层卷积核步长；Kernel<sub>i+1</sub>是第i层卷积核尺寸大小。</strong><br>1个3x3卷积核感受野为3x3，2个3x3卷积核感受野为5x5，3个3x3卷积核感受野为7x7，n个3x3卷积核感受野为2n+1 x 2n+1，n为3x3卷积核个数；池化层卷积核一般为2x2，卷积层卷积核一般为3x3；</p>
+<p>若无池化，4个3x3卷积核感受野为9x9，而加入3个2x2卷积核的池化层后，感受野变为30x30，很明显感受野迅速增大。</p>
+<p>根据此特点，越深层的特征点描述的原图像信息越全面，可通过增加网络层数，增加池化层，和使用更大的卷积核来增加感受野。</p>
+<h3 id="有效感受野-Effective-Receptive-Field"><a href="#有效感受野-Effective-Receptive-Field" class="headerlink" title="有效感受野(Effective Receptive Field)"></a>有效感受野(Effective Receptive Field)</h3><p>实际的有效感受野是一个高斯分布，增大有效感受野：空洞卷积(不丢失分辨率(精确定位)，扩大感受野(检测分割大目标))。</p>
+<h3 id="空洞卷积-扩张卷积"><a href="#空洞卷积-扩张卷积" class="headerlink" title="空洞卷积/扩张卷积"></a>空洞卷积/扩张卷积</h3><p>空洞卷积：在相同计算条件下，提供了更大感受野。空洞位置填0.</p>
+<p>通过在原卷积核元素之间插入空格来使原卷积核扩张。扩张率(dilation rate)表示扩张程度。但是参数数量是一样的，不会增加卷积核的大小。</p>
+<p>比较：一个5x5大小的区域经过2次3x3的卷积后，变成一个像素点；一个13x13大小的区域经过2次3x3的空洞卷积后，变成了一个像素点。</p>
+<p>空洞卷积与普通卷积相比：卷积核大小一样，即参数数量一样，输出的特征图大小一样，区别在于空洞卷积在不做pooling损失信息的情况下有更大的感受野，</p>
+<p>扩张率：卷积核个元素之间间隔数量。显然普通卷积核的扩张率为0，感受野3x3；</p>
+<p>空洞卷积感受野计算公式：<br>F = (2<sup>log<sub>2</sub>rate+2</sup> - 1) x (2<sup>log<sub>2</sub>rate+2</sup> - 1)</p>
+<p>普通卷积，扩张率为1，感受野3x3；扩张率为2，感受野为7x7；扩张率为4，感受野为15x15；</p>
+<h1 id="五-Fletten"><a href="#五-Fletten" class="headerlink" title="五.Fletten"></a>五.Fletten</h1><p>将池化后的像素拉开，变成一维向量，方便输入到全连接层。</p>
+
+      
+      
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习//" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://jackzhang9.github.io/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/09/23/%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AAtxt%E6%88%90%E4%B8%80%E4%B8%AAcsv%E6%96%87%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">合并多个txt成一个csv文件</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="深度学习之卷积神经网络" data-title="深度学习之卷积神经网络" data-url="https://JackZhang9.github.io/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://JackZhang9.github.io/2021/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/", 
+    sourceId: "深度学习之卷积神经网络",
+    productKey: "ture",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
+  
+    <div id="gitalk-container"></div>
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+
+  
+
+  
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'https://github.com/JackZhang9/store_comments',
+  owner: '',
+  admin: [''],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+
+  
+
 
 
           </div>
@@ -323,10 +549,10 @@
 	var yiliaConfig = {
 		mathjax: ture,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
